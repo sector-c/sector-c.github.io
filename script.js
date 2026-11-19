@@ -6,6 +6,9 @@
   const ACCENTS = ['teal', 'blue', 'coral', 'pink'];
   const root = document.documentElement;
 
+  // Start each page load with a new random accent. Never save it to storage.
+  root.dataset.accent = ACCENTS[Math.floor(Math.random() * ACCENTS.length)];
+
   // Apply a saved choice early to avoid flashing the default light theme.
   try {
     const savedTheme = localStorage.getItem(THEME_KEY);
@@ -25,13 +28,7 @@
     const modalRoot = $('#modal-root');
     const savedAt = $('meta[name="site-saved-at"]')?.content;
 
-    // Keep the existing per-site accent preference key compatible with older versions.
     const seedText = $('#site-data')?.textContent || '{}';
-    const siteHash = [...seedText].reduce(
-      (hash, char) => Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0,
-      2166136261
-    ).toString(36);
-    const ACCENT_KEY = `macintosh-links:accent:${siteHash}`;
 
     let shortcuts = [];
     try {
@@ -42,18 +39,10 @@
     }
 
     let themePreference = root.getAttribute('data-theme') || 'auto';
-    let accentPreference = root.dataset.accent || 'teal';
+    let accentPreference = root.dataset.accent;
     let sourceModified = validDate(savedAt);
     let toastTimeout;
     let previousFocus = null;
-
-    try {
-      const storedAccent = localStorage.getItem(ACCENT_KEY);
-      if (ACCENTS.includes(storedAccent)) accentPreference = storedAccent;
-    } catch (_) {
-      // Accent selection still works in this tab.
-    }
-    root.dataset.accent = accentPreference;
 
     function isDark() {
       return themePreference === 'dark' ||
@@ -114,11 +103,6 @@
     function cycleAccent() {
       accentPreference = ACCENTS[(ACCENTS.indexOf(accentPreference) + 1) % ACCENTS.length];
       root.dataset.accent = accentPreference;
-      try {
-        localStorage.setItem(ACCENT_KEY, accentPreference);
-      } catch (_) {
-        // Accent selection still works without persistence.
-      }
       refreshAccentControl();
     }
 
@@ -299,7 +283,7 @@
     function exportHtml() {
       const copy = document.documentElement.cloneNode(true);
       copy.dataset.theme = 'light';
-      copy.dataset.accent = accentPreference;
+      copy.dataset.accent = 'teal'; // Static fallback; script.js chooses randomly when loaded.
       const timestamp = new Date();
       const dateMeta = copy.querySelector('meta[name="site-saved-at"]');
       if (dateMeta) dateMeta.content = timestamp.toISOString();
