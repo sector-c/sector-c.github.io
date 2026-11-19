@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-accent="teal">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#EAF8F8">
+  <meta name="site-saved-at" content="2026-11-18T19:01:30Z">
+  <meta name="description" content="A little corner of the internet, presented like a classic Macintosh desktop.">
+  <title>SynyoSK Studio </title>
+  <!-- Flaticon Uicons: Solid Straight (fi-ss-*) -->
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-straight/css/uicons-solid-straight.css">
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/4.0.0/uicons-brands/css/uicons-brands.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <!-- Edit custom link boxes directly in this HTML. The site-data JSON below configures the desktop shortcuts. -->
+  <script id="site-data" type="application/json">
+    {
+      "name":"Your Name",
+      "handle":"@yourhandle",
+      "bio":"Artist, designer & collector of digital things. Welcome to my little corner of the internet.",
+      "avatar":"",
+      "links":[{"id":"portfolio","title":"My Website","url":"https://example.com","icon":"globe"},
+      {"id":"sketchbook","title":"Sketchbook","url":"https://www.behance.net/","icon":"folder"},
+      {"id":"photos","title":"Photo Album","url":"https://www.instagram.com/","icon":"photo"},
+      {"id":"music","title":"Jukebox","url":"https://open.spotify.com/","icon":"music"},
+      {"id":"videos","title":"Cinema","url":"https://www.youtube.com/","icon":"video"},
+      {"id":"contact","title":"Contact Me","url":"mailto:hello@example.com","icon":"mail"}]
+    }
+  </script>
+  <header class="menubar" aria-label="Desktop menu bar">
+    <button
+      class="lightbulb-toggle"
+      id="lightbulb-toggle"
+      type="button"
+      data-action="theme-toggle"
+      aria-label="Switch to dark mode"
+      title="Switch to dark mode"
+      aria-pressed="false"
+    >
+      <i class="fi fi-ss-bulb lightbulb-icon" aria-hidden="true"></i>
+    </button>
+    <div class="menu-group">
+      <div class="menu-item">
+        <button class="menu-trigger" data-menu="finder" aria-expanded="false" aria-haspopup="true">Finder</button>
+        <div class="menu-popup" data-popup="finder" hidden>
+          <button data-action="about">About This Page…</button>
+          <hr>
+          <button data-action="help">How to use</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <button class="menu-trigger" data-menu="file" aria-expanded="false" aria-haspopup="true">File</button>
+        <div class="menu-popup" data-popup="file" hidden>
+          <button data-action="export">Export HTML…</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <button class="menu-trigger" data-menu="edit" aria-expanded="false" aria-haspopup="true">Edit</button>
+        <div class="menu-popup" data-popup="edit" hidden>
+          <button data-action="copy">Copy Page Address</button>
+          <button data-action="share">Share Page…</button>
+        </div>
+      </div>
+      <div class="menu-item optional">
+        <button class="menu-trigger" data-menu="view" aria-expanded="false" aria-haspopup="true">View</button>
+        <div class="menu-popup" data-popup="view" hidden>
+          <button type="button" class="theme-menu-choice" data-theme-choice="auto" data-action="theme-auto" aria-pressed="false"><span class="theme-check"></span> Follow System</button>
+          <button type="button" class="theme-menu-choice" data-theme-choice="light" data-action="theme-light" aria-pressed="true"><span class="theme-check">✓</span> Light Theme</button>
+          <button type="button" class="theme-menu-choice" data-theme-choice="dark" data-action="theme-dark" aria-pressed="false"><span class="theme-check"></span> Dark Theme</button>
+        </div>
+      </div>
+      <div class="menu-item optional">
+        <button class="menu-trigger" data-menu="special" aria-expanded="false" aria-haspopup="true">Special</button>
+        <div class="menu-popup" data-popup="special" hidden>
+          <button data-action="about">About This Page…</button>
+        </div>
+      </div>
+    </div>
+    <time class="menu-clock" id="clock" aria-label="Current time"></time>
+    <button
+      type="button"
+      class="accent-cycle"
+      id="accent-cycle"
+      data-action="accent-cycle"
+      aria-label="Accent color: teal. Click to switch to blue"
+      title="Accent: teal • Next: blue"
+    >
+      <span class="accent-dot" aria-hidden="true"></span>
+    </button>
+  </header>
+  <main class="desktop">
+    <aside class="desktop-icons" aria-label="Desktop shortcuts">
+      <button class="desktop-shortcut" data-action="about"><i class="fi fi-ss-file file-icon icon-document" aria-hidden="true"></i><span class="desktop-label">Read Me</span></button>
+      <button class="desktop-shortcut" data-shortcut="photos"><i class="fi fi-ss-images file-icon icon-photo" aria-hidden="true"></i><span class="desktop-label">Photo Album</span></button>
+      <button class="desktop-shortcut" data-shortcut="music"><i class="fi fi-ss-music-alt file-icon icon-music" aria-hidden="true"></i><span class="desktop-label">Jukebox</span></button>
+      <button class="desktop-shortcut" data-shortcut="videos"><i class="fi fi-ss-film file-icon icon-video" aria-hidden="true"></i><span class="desktop-label">Cinema</span></button>
+    </aside>
+
+    <section class="generic-window" aria-labelledby="untitled-window-title">
+      <div class="window-title">
+        <span class="window-control" aria-hidden="true"><i class="fi fi-ss-cross-small"></i></span>
+        <div class="window-lines"></div>
+        <div class="window-heading" id="untitled-window-title">Home</div>
+        <div class="window-lines"></div>
+        <div class="window-title-right"><span class="window-control" aria-hidden="true"><i class="fi fi-ss-square-small"></i></span></div>
+      </div>
+      <div class="profile">
+        <div class="avatar"><i class="fi fi-ss-folder file-icon icon-folder" aria-hidden="true"></i></div>
+        <div class="profile-copy">
+          <div class="small-caption">Welcome to my desktop?</div>
+          <h1>SynyoRK Studio</h1>
+          <div class="handle">@Synyore</div>
+          <div class="bio" >Artist, designer & collector of digital things.</div>
+        </div>
+        <div class="profile-actions">
+          <button class="mac-button" type="button" data-action="share"><i class="fi fi-ss-share" aria-hidden="true"></i> Share</button>
+        </div>
+      </div>
+
+      <div class="pathbar">
+        <div class="breadcrumb"><strong><i class="fi fi-ss-caret-right" aria-hidden="true"></i> Macintosh HD</strong> <span><i class="fi fi-ss-angle-right" aria-hidden="true"></i></span> <span>My Links</span></div>
+        <span class="item-count">6 items</span>
+      </div>
+
+      <div class="link-container">
+        <div class="link-hotzone">
+          <div class="link-icon"><i class="fi fi-ss-butterfly"></i></div>
+          <div class="link-text">Bluesky</div>
+        </div>
+        <div class="link-share"><i class="fi fi-ss-copy-alt"></i></div>
+      </div>
+
+      <div class="link-container">
+        <div class="link-hotzone">
+          <div class="link-icon"><i class="fi fi-brands-twitter-alt"></i></div>
+          <div class="link-text">X.com</div>
+        </div>
+        <div class="link-share"><i class="fi fi-ss-copy-alt"></i></div>
+      </div>
+
+      <div class="link-container">
+        <div class="link-hotzone">
+          <div class="link-icon"><i class="fi fi-brands-youtube"></i></div>
+          <div class="link-text">YouTube</div>
+        </div>
+        <div class="link-share"><i class="fi fi-ss-copy-alt"></i></div>
+      </div>
+
+      <div class="pathbar">
+        <div class="breadcrumb"><strong><i class="fi fi-ss-caret-right" aria-hidden="true"></i> Macintosh HD</strong> <span><i class="fi fi-ss-angle-right" aria-hidden="true"></i></span> <span>My Links</span></div>
+        <span class="item-count">6 items</span>
+      </div>
+      <div class="untitled-body">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+
+      <div class="statusbar">
+        <span id="status-count">6 saved links</span>
+      </div>
+    </section>
+    <p class="desk-note">A little corner of the <span>World Wide Web</span> · <span id="year"></span> · <span id="last-modified">Last Modified: …</span> · <a href="https://www.flaticon.com/uicons" target="_blank" rel="noopener noreferrer">Uicons by Flaticon</a></p>
+  </main>
+  <div id="modal-root"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+</body>
+</html>

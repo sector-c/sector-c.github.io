@@ -1,0 +1,1315 @@
+/* Macintosh Links: Uicons Solid Straight edition.
+   Keep this stylesheet beside the HTML and custom fonts in fonts/. */
+
+/* Original website typography, from mysite.css.
+   Keep your own font files in a sibling fonts/ directory. */
+@font-face {
+  font-family: "TXGH";
+  src: url("fonts/texgyreheros-regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TXGH";
+  src: url("fonts/texgyreheros-italic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TXGH";
+  src: url("fonts/texgyreheros-bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Virtue";
+  src: url("fonts/virtue.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "pnr";
+  src: url("fonts/pnr.otf") format("opentype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "3pv";
+  src: url("fonts/3pv.otf") format("opentype");
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+}
+
+/* Permanent palette: these names always refer to the same colors. */
+:root {
+  /* Neutrals */
+  --china-plate: #F4F4F9;
+  --white: #FFFFFF;
+  --lavender-mist: #D2D1E3;
+  --lavender-helper: #9C9CB0;
+  --grey-velvet: #302F3B;
+  --charcoal: #272630;
+  --charcoal-lite: #57575D;
+
+  /* Teal */
+  --teal: #1A7478;
+  --teal-lite: #5DC6C8;
+
+  /* Pink */
+  --raddish-pink: #B02A7B;
+  --raddish-pink-lite: #FF9BD4;
+
+  /* Blue */
+  --coastal-blue: #2F5FD0;
+  --coastal-blue-lite: #6B9AF6;
+
+  /* Coral */
+  --coral: #C93832;
+  --coral-lite: #FF7771;
+
+  /* Semantic assignments: light on first visit. */
+  --bg: var(--china-plate);
+  --surface: var(--white);
+  --border: var(--lavender-mist);
+  --text: var(--charcoal);
+  --text-muted: var(--charcoal-lite);
+  --accent: var(--teal);
+  --accent-fill: var(--teal-lite);
+  --on-accent: var(--charcoal);
+  --accent-2: var(--raddish-pink);
+  --accent-2-fill: var(--raddish-pink-lite);
+  --info: var(--coastal-blue);
+  --info-fill: var(--coastal-blue-lite);
+  --danger: var(--coral);
+  --danger-fill: var(--coral-lite);
+  color-scheme: light;
+}
+
+/* When Follow System is chosen, JavaScript removes data-theme.
+   An explicit light choice keeps the light assignments above. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: var(--charcoal);
+    --surface: var(--grey-velvet);
+    --border: var(--charcoal-lite);
+    --text: var(--lavender-mist);
+    --text-muted: var(--lavender-helper);
+    --accent: var(--teal-lite);
+    --accent-fill: var(--teal);
+    --on-accent: var(--charcoal);
+    --accent-2: var(--raddish-pink-lite);
+    --accent-2-fill: var(--raddish-pink);
+    --info: var(--coastal-blue-lite);
+    --info-fill: var(--coastal-blue);
+    --danger: var(--coral-lite);
+    --danger-fill: var(--coral);
+    color-scheme: dark;
+  }
+}
+
+/* Explicit dark choice, regardless of the operating system theme. */
+:root[data-theme="dark"] {
+  --bg: var(--charcoal);
+  --surface: var(--grey-velvet);
+  --border: var(--charcoal-lite);
+  --text: var(--lavender-mist);
+  --text-muted: var(--lavender-helper);
+  --accent: var(--teal-lite);
+  --accent-fill: var(--teal);
+  --on-accent: var(--charcoal);
+  --accent-2: var(--raddish-pink-lite);
+  --accent-2-fill: var(--raddish-pink);
+  --info: var(--coastal-blue-lite);
+  --info-fill: var(--coastal-blue);
+  --danger: var(--coral-lite);
+  --danger-fill: var(--coral);
+  color-scheme: dark;
+}
+
+/* Macintosh UI semantic tokens, never a second competing palette. */
+:root {
+  --desktop: var(--bg);
+  --paper: var(--surface);
+  --ink: var(--text);
+  --hairline: var(--border);
+  --selection: color-mix(in srgb, var(--info-fill) 24%, var(--surface));
+  --blue: var(--info);
+  --yellow: var(--accent-fill);
+  --surface-raised: color-mix(in srgb, var(--surface) 82%, var(--border));
+  --row-hover: color-mix(in srgb, var(--accent-fill) 27%, var(--surface));
+  --system-font: "pnr", Arial, sans-serif;
+  --accent-font: "Virtue", Georgia, serif;
+  --header-font: "3pv", serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Let the browser allocate a scrollbar gutter only when needed.
+   On short pages the menu bar fills the entire viewport width. */
+html {
+  min-height: 100%;
+  background: var(--bg);
+  scrollbar-gutter: auto;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: var(--system-font);
+  font-size: 13px;
+  -webkit-font-smoothing: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--info);
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.desktop {
+  position: relative;
+  min-height: calc(100dvh - 28px);
+  padding: 38px 32px 80px;
+  background-color: var(--desktop);
+  background-image: none;
+  isolation: isolate;
+}
+
+.menubar {
+  height: 28px;
+  padding: 0 13px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px var(--surface) inset;
+  font-family: var(--system-font);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.lightbulb-icon {
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  flex: none;
+}
+
+.menu-group {
+  display: flex;
+  gap: 1px;
+  align-items: center;
+  height: 100%;
+}
+
+.menu-item {
+  position: relative;
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+
+.menu-trigger {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  border: 0;
+  background: transparent;
+  padding: 4px 10px;
+  border-radius: 0;
+  color: var(--ink);
+  height: 100%;
+}
+
+/* Every Finder menu item follows the active color-dot accent.
+   Use the same fill as the lightbulb, and keep open menus highlighted. */
+.menu-trigger:hover,
+.menu-trigger:focus-visible,
+.menu-trigger[aria-expanded="true"] {
+  background: var(--accent-fill);
+  color: var(--on-accent);
+}
+
+.menu-popup {
+  position: absolute;
+  left: 0;
+  top: 27px;
+  background: var(--surface);
+  border: 1px solid var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+  min-width: 206px;
+  padding: 5px 0;
+  font-family: var(--system-font);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.menu-popup button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  padding: 7px 17px;
+  text-align: left;
+}
+
+.menu-popup button:hover {
+  background: var(--accent-fill);
+  color: var(--on-accent);
+}
+
+.menu-popup hr {
+  margin: 5px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.menu-clock {
+  font-family: var(--system-font);
+  font-weight: 400;
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.desktop-icons {
+  position: absolute;
+  right: clamp(12px, 3vw, 46px);
+  top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 108px;
+}
+
+.desktop-shortcut {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text);
+  padding: 4px 3px 6px;
+  width: 108px;
+  min-height: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+  text-align: center;
+  text-shadow: none;
+  font-size: 12px;
+}
+
+.desktop-shortcut:hover,
+.desktop-shortcut:focus-visible {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent-fill) 23%, transparent);
+  outline: none;
+}
+
+.desktop-shortcut:active .desktop-label {
+  background: var(--accent-2-fill);
+  color: var(--on-accent);
+}
+
+.desktop-shortcut .file-icon {
+  width: 36px;
+  height: 36px;
+  font-size: 34px;
+  filter: drop-shadow(1px 1px 0 var(--border));
+}
+
+.desktop-label {
+  padding: 2px 4px;
+  line-height: 1.15;
+}
+
+.generic-window {
+  width: min(735px, 100%);
+  margin: 8px auto 0;
+  background: var(--paper);
+  border: 1px solid var(--text);
+  outline: 1px solid var(--border);
+  outline-offset: -3px;
+  box-shadow: 2px 2px 0 var(--border), -1px -1px 0 var(--surface), 4px 5px 0 color-mix(in srgb, var(--text) 18%, transparent);
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+
+  /* Keep the original square top edge, rounding only the lower corners. */
+  border-radius: 0 0 18px 18px;
+}
+
+.window-title {
+  height: 25px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--surface-raised);
+  background-image: repeating-linear-gradient(to bottom, var(--surface) 0 1px, var(--border) 1px 2px, var(--surface-raised) 2px 3px);
+}
+
+.window-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 8px;
+  background: var(--surface-raised);
+  font-family: var(--system-font);
+  font-weight: 400;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.window-control {
+  background: var(--surface);
+  border: 1px solid var(--text);
+  color: var(--text);
+  flex: none;
+  width: 13px;
+  height: 13px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-size: 11px;
+  line-height: 1;
+  box-shadow: 1px 1px 0 var(--surface) inset, -1px -1px 0 var(--border) inset;
+}
+
+.window-control:hover {
+  background: var(--accent-2-fill);
+}
+
+.window-lines {
+  flex: 1;
+  height: 100%;
+}
+
+
+
+.window-title-right {
+  display: flex;
+  gap: 2px;
+}
+
+.pathbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 31px;
+  padding: 7px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-raised);
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.pathbar strong {
+  color: var(--text);
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile {
+  min-height: 148px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 23px 27px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--paper);
+  background: var(--hairline);
+}
+
+.avatar {
+  width: 81px;
+  height: 81px;
+  flex: 0 0 81px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: inset 1px 1px var(--surface), inset -1px -1px var(--border), 2px 2px 0 var(--border);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar .file-icon {
+  width: 62px;
+  height: 62px;
+  font-size: 54px;
+}
+
+.profile-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.small-caption {
+  font-family: var(--accent-font);
+  font-style: italic;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: .3px;
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.profile h1 {
+  font-family: var(--system-font);
+  font-weight: 300;
+  font-size: clamp(28px, 3.6vw, 36px);
+  letter-spacing: -.7px;
+  line-height: 1.12;
+  margin: 0 0 7px;
+  overflow-wrap: anywhere;
+}
+
+.profile .handle {
+  font-family: var(--accent-font);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.profile .bio {
+  color: var(--text-muted);
+  line-height: 1.45;
+  font-size: 12px;
+  max-width: 450px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 6px;
+  flex: none;
+  align-self: flex-start;
+}
+
+.mac-button {
+  background: linear-gradient(var(--surface), var(--surface-raised));
+  color: var(--text);
+  min-height: 27px;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  padding: 5px 10px;
+  box-shadow: inset 1px 1px 0 var(--surface), inset -1px -1px 0 var(--border), 1px 1px 0 var(--border);
+  font-size: 11px;
+  font-family: var(--accent-font);
+}
+
+.mac-button:hover {
+  background: var(--accent-fill);
+  color: var(--on-accent);
+}
+
+.mac-button:active {
+  box-shadow: inset 2px 2px 0 var(--border);
+  transform: translate(1px,1px);
+}
+
+.mac-button.primary {
+  border: 2px solid var(--text);
+  padding: 4px 10px;
+  background: var(--accent-fill);
+  color: var(--on-accent);
+}
+
+
+
+.file-icon {
+  width: 27px;
+  height: 27px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  line-height: 1;
+  color: var(--info);
+}
+
+
+
+
+.statusbar {
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-raised);
+  padding: 0 17px;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-radius: 0 0 17px 17px;
+}
+
+.statusbar strong {
+  color: var(--text);
+}
+
+
+
+.desk-note {
+  position: relative;
+  z-index: 1;
+  margin: 21px auto 0;
+  width: min(735px, 100%);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 11px;
+  text-shadow: none;
+}
+
+.desk-note span {
+  border-bottom: 1px dotted var(--border);
+}
+
+.modal-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: color-mix(in srgb, var(--text) 48%, transparent);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 65px 16px 35px;
+}
+
+.dialog-window {
+  border: 1px solid var(--text);
+  width: min(670px,100%);
+  background: var(--surface);
+  box-shadow: 2px 2px 0 var(--border), 5px 7px 0 color-mix(in srgb, var(--text) 35%, transparent);
+}
+
+.dialog-window.compact {
+  width: min(455px,100%);
+}
+
+.dialog-body {
+  padding: 19px 22px 17px;
+  max-height: calc(100dvh - 135px);
+  overflow: auto;
+}
+
+.dialog-body p {
+  line-height: 1.5;
+}
+
+.dialog-heading {
+  font-size: 20px;
+  margin: 0 0 14px;
+  font-family: var(--accent-font);
+  font-weight: 300;
+}
+
+/* Main link box */
+.link-container {
+  --link-slot: clamp(46px, 12vw, 64px);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--link-slot);
+
+  min-height: var(--link-slot);
+  margin: 12px 16px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Clickable link area */
+.link-hotzone {
+  display: grid;
+  grid-template-columns: var(--link-slot) minmax(0, 1fr);
+
+  min-width: 0;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.link-hotzone:hover {
+  background: var(--row-hover);
+}
+
+/* Left icon box */
+.link-icon {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  color: var(--accent);
+  background: var(--accent-fill);
+}
+
+/* Scale the icon relative to its slot */
+.link-icon .fi {
+  font-size: calc(var(--link-slot) * 0.72);
+  line-height: 1;
+  color: var(--surface);
+}
+
+/* Middle text box */
+.link-text {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  padding: 8px 12px;
+
+  font-weight: 700;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* Right copy button */
+.link-share {
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+
+  color: var(--text);
+  background: var(--surface-raised);
+
+  border: 0;
+  border-left: 1px solid var(--border);
+
+  cursor: pointer;
+}
+
+.link-share .fi {
+  font-size: calc(var(--link-slot) * 0.38);
+  line-height: 1;
+}
+
+.link-share:hover {
+  color: var(--on-accent);
+  background: var(--accent-fill);
+}
+
+
+/***
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 15px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.form-field.full {
+  grid-column: 1/-1;
+}
+
+.form-field input,
+.form-field textarea,
+.link-editor input,
+.link-editor select {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  min-height: 31px;
+  box-shadow: 1px 1px 0 var(--surface), inset 1px 1px 0 var(--border);
+  padding: 6px 8px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.form-field textarea {
+  min-height: 65px;
+  resize: vertical;
+}
+
+.form-tip {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  margin: 8px 0 0;
+}
+
+.form-separator {
+  border: 0;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 1px var(--surface);
+  margin: 19px 0 13px;
+}
+
+.editor-section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-family: var(--system-font);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.link-editor {
+  display: grid;
+  grid-template-columns: 26px minmax(0,1fr) minmax(0,1.2fr) 87px;
+  gap: 5px;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.link-editor .handle-index {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.link-editor input,
+.link-editor select {
+  min-width: 0;
+}
+
+.link-editor-actions {
+  grid-column: 2 / -1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.link-editor-actions .mac-button {
+  min-height: 23px;
+  padding: 3px 8px;
+}
+
+.link-editor-actions .delete {
+  margin-left: auto;
+}
+
+
+***/
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 21px;
+}
+
+.dialog-actions.split {
+  justify-content: space-between;
+}
+
+.info-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.info-line .file-icon {
+  width: 60px;
+  height: 60px;
+  font-size: 50px;
+}
+
+.info-line h2 {
+  font: 300 25px var(--accent-font);
+  margin: 0 0 6px;
+}
+
+.info-line p {
+  margin: 0 0 7px;
+  font-size: 12px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  background: var(--surface);
+  border: 1px solid var(--text);
+  box-shadow: 2px 2px var(--border);
+  padding: 12px 18px;
+  max-width: min(90vw,430px);
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .generic-window {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 1030px) {
+  .desktop-icons {
+    right: 8px;
+    width: 84px;
+  }
+  .desktop-shortcut {
+    width: 84px;
+  }
+  .generic-window {
+    margin-left: max(13px, calc((100vw - 790px)/2));
+    margin-right: 0;
+  }
+  .desk-note {
+    margin-left: max(13px, calc((100vw - 790px)/2));
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 910px) {
+  .desktop-icons {
+    display: none;
+  }
+  .generic-window,
+.desk-note {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .menubar {
+    gap: 5px;
+    padding: 0 7px;
+  }
+  .menu-trigger {
+    padding: 4px 7px;
+  }
+  .menu-item.optional {
+    display: none;
+  }
+  .menu-clock {
+    font-size: 11px;
+  }
+  .desktop {
+    padding: 18px 0 55px;
+  }
+  /* Use the actual content width (not viewport width, which includes
+       classic scrollbar gutters on some desktop browsers). */
+  .generic-window {
+    width: calc(100% - 22px);
+    margin-top: 0;
+  }
+  .window-heading {
+    font-size: 11px;
+  }
+  .profile {
+    padding: 20px 14px 17px;
+    gap: 12px;
+    min-height: 140px;
+    flex-wrap: wrap;
+  }
+  .avatar {
+    width: 65px;
+    height: 65px;
+    flex-basis: 65px;
+  }
+  .avatar .file-icon {
+    width: 53px;
+    height: 53px;
+    font-size: 45px;
+  }
+  .profile-copy {
+    flex-basis: calc(100% - 85px);
+  }
+  .profile h1 {
+    font-size: 24px;
+  }
+  .profile-actions {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 1px;
+  }
+
+
+
+
+
+
+
+
+  .file-icon {
+    width: 25px;
+    height: 25px;
+    font-size: 23px;
+  }
+  .statusbar {
+    padding: 0 12px;
+  }
+
+  .desk-note {
+    width: 95%;
+  }
+  .dialog-body {
+    padding: 16px 13px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-field.full {
+    grid-column: auto;
+  }
+  .link-editor {
+    grid-template-columns: 20px minmax(0,1fr) 76px;
+  }
+  .link-editor .url-input {
+    grid-column: 2/-1;
+  }
+  .link-editor .icon-select {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .link-editor-actions {
+    grid-column: 2/-1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .generic-window {
+    animation: window-appear 280ms ease-out both;
+  }
+  @keyframes window-appear {
+    from {
+      opacity: .4;
+      transform: translateY(10px) scale(.99);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+
+
+.dialog-actions-right {
+  display: flex;
+  gap: 9px;
+}
+
+/* Intent-based editing actions use the danger token, not a fixed red. */
+.link-editor-actions .delete {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.link-editor-actions .delete:hover {
+  background: var(--danger-fill);
+  color: var(--on-accent);
+}
+
+/* Theme controls in the Finder View menu. */
+
+
+
+
+.theme-menu-choice {
+  gap: 8px;
+  justify-content: flex-start !important;
+}
+
+.theme-menu-choice[aria-pressed="true"] {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.theme-check {
+  display: inline-block;
+  width: 13px;
+  text-align: center;
+}
+
+.menu-popup .theme-menu-choice:hover {
+  color: var(--on-accent);
+}
+
+.menu-popup .theme-menu-choice:hover .theme-check {
+  color: inherit;
+}
+
+/* Dark mode retains the bevels without a glowing white outer frame. */
+.generic-window {
+  outline-color: var(--border);
+}
+
+.window-control {
+  box-shadow: inset 1px 1px 0 var(--surface), inset -1px -1px 0 var(--border);
+}
+
+.mac-button:focus-visible {
+  outline-color: var(--info);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.link-editor input:focus,
+.link-editor select:focus {
+  border-color: var(--accent);
+}
+
+
+
+
+
+
+.clipboard-temp {
+  position: fixed;
+  left: -9999px;
+}
+
+/* Theme and accent controls in the Finder menu bar. */
+.lightbulb-toggle {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 25px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.lightbulb-toggle:hover,
+.lightbulb-toggle:focus-visible {
+  background: var(--accent-fill);
+}
+
+.accent-cycle {
+  flex: 0 0 26px;
+  width: 26px;
+  height: 25px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.accent-cycle:hover,
+.accent-cycle:focus-visible {
+  background: var(--row-hover);
+}
+
+.accent-dot {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: block;
+  border: 1px solid var(--text-muted);
+  background-color: var(--accent-fill);
+  box-shadow: inset 1px 1px 0 color-mix(in srgb, white 45%, transparent), 1px 1px 0 var(--border);
+}
+
+.desk-note #last-modified {
+  white-space: nowrap;
+}
+
+/* The selected accent drives BOTH the controls and desktop background.
+   Palette order: teal → blue → coral → pink → teal.
+   Light is the first-visit default; system appearance is optional. */
+:root[data-accent="teal"] {
+  --tone-light: #EAF8F8;
+  --tone-dark: #21363B;
+  --tone-light-ink: var(--teal);
+  --tone-dark-ink: var(--teal-lite);
+  --accent-fill: var(--teal-lite);
+}
+
+:root[data-accent="blue"] {
+  --tone-light: #EEF2FF;
+  --tone-dark: #232C43;
+  --tone-light-ink: var(--coastal-blue);
+  --tone-dark-ink: var(--coastal-blue-lite);
+  --accent-fill: var(--coastal-blue-lite);
+}
+
+:root[data-accent="coral"] {
+  --tone-light: #FFF0ED;
+  --tone-dark: #392B30;
+  --tone-light-ink: var(--coral);
+  --tone-dark-ink: var(--coral-lite);
+  --accent-fill: var(--coral-lite);
+}
+
+:root[data-accent="pink"] {
+  --tone-light: #FFF0F8;
+  --tone-dark: #352638;
+  --tone-light-ink: var(--raddish-pink);
+  --tone-dark-ink: var(--raddish-pink-lite);
+  --accent-fill: var(--raddish-pink-lite);
+}
+
+:root[data-accent] {
+  --accent: var(--tone-light-ink);
+  --bg: var(--tone-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-accent] {
+    --accent: var(--tone-dark-ink);
+    --bg: var(--tone-dark);
+  }
+}
+
+:root[data-theme="dark"][data-accent] {
+  --accent: var(--tone-dark-ink);
+  --bg: var(--tone-dark);
+}
+
+/* Shared spacing for additional generic windows. */
+.generic-window + .generic-window {
+  margin-top: 27px;
+}
+
+.untitled-body {
+  min-height: 144px;
+  padding: 25px 27px 29px;
+  background: var(--surface);
+  border-radius: 0 0 17px 17px;
+}
+
+.untitled-body p {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--text);
+  font: 400 13px/1.7 var(--system-font);
+}
+
+@media (max-width: 600px) {
+  .generic-window + .generic-window {
+    margin-top: 20px;
+  }
+  .untitled-body {
+    padding: 19px 18px 24px;
+  }
+}
+
+/* Uicons: the icon font is monochrome and follows the site's theme tokens. */
+.file-icon.icon-document {
+  color: var(--text);
+}
+
+.file-icon.icon-folder {
+  color: var(--accent);
+}
+
+.file-icon.icon-photo {
+  color: var(--accent-2);
+}
+
+.file-icon.icon-video {
+  color: var(--danger);
+}
+
+
+
+.window-control .fi {
+  display: inline-flex;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.mac-button .fi,
+.link-editor-actions .fi,
+.editor-section-title .fi {
+  display: inline-flex;
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.mac-button .fi {
+  margin-right: 4px;
+}
+
+
+
+
+
+.desk-note a {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
