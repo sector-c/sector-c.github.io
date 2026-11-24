@@ -207,7 +207,7 @@ a {
 .desktop {
   position: relative;
   min-height: calc(100dvh - 28px);
-  padding: 38px 32px 80px;
+  padding: 22px 32px 80px;
   background-color: var(--desktop);
   background-image: none;
   isolation: isolate;
