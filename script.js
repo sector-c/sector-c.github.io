@@ -28,16 +28,6 @@
     const modalRoot = $('#modal-root');
     const savedAt = $('meta[name="site-saved-at"]')?.content;
 
-    const seedText = $('#site-data')?.textContent || '{}';
-
-    let shortcuts = [];
-    try {
-      const config = JSON.parse(seedText);
-      shortcuts = Array.isArray(config.links) ? config.links : [];
-    } catch (error) {
-      console.warn('Invalid desktop shortcut data:', error);
-    }
-
     let themePreference = root.getAttribute('data-theme') || 'auto';
     let accentPreference = root.dataset.accent;
     let sourceModified = validDate(savedAt);
@@ -136,23 +126,6 @@
           refreshLastModified();
         }
       }).catch(() => {});
-    }
-
-    function safeUrl(value) {
-      const text = String(value || '').trim();
-      if (/^mailto:[^\s@]+@[^\s@]+\.[^\s@]+$/i.test(text)) return text;
-      try {
-        const url = new URL(text);
-        return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
-      } catch (_) {
-        return '';
-      }
-    }
-
-    function shortcutFor(category) {
-      const aliases = { photos: 'photo', music: 'music', videos: 'video' };
-      return shortcuts.find(link => link.id === category) ||
-        shortcuts.find(link => link.icon === aliases[category]);
     }
 
     function refreshLinkCount() {
@@ -347,10 +320,7 @@
       }
       const shortcut = event.target.closest('[data-shortcut]');
       if (shortcut) {
-        const link = shortcutFor(shortcut.dataset.shortcut);
-        const url = safeUrl(link?.url);
-        if (url) window.open(url, '_blank', 'noopener,noreferrer');
-        else notify('Shortcut not set up. Edit the site-data JSON to add a URL.');
+        notify('Shortcut not configured.');
         return;
       }
       if (!event.target.closest('.menu-popup')) closeMenus();
@@ -384,8 +354,7 @@
     }
 
     $$('.desktop-shortcut[data-shortcut]').forEach(button => {
-      const link = shortcutFor(button.dataset.shortcut);
-      button.title = link ? `Open ${link.title}` : 'Shortcut not configured';
+      button.title = 'Shortcut not configured';
     });
     const copyrightYear = $('#year');
     if (copyrightYear) copyrightYear.textContent = `© ${new Date().getFullYear()}`;
