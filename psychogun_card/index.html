@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark"><title>COBRA THE ARCADE | Psychogun Card</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="pagetop" class="site">
+  <header class="topline"><span>COBRA THE ARCADE <span class="sep">/</span> <span data-i="portal">PSYCHOGUN CARD SYSTEM</span></span><div class="langs" role="group" aria-label="Language"><button type="button" id="en" aria-pressed="true">EN</button><span>/</span><button type="button" id="jp" aria-pressed="false">JP</button></div></header>
+  <div class="layout">
+    <aside id="menu">
+      <a class="logo" href="#pagetop" aria-label="Cobra The Arcade"><span>COBRA</span><b>THE ARCADE</b></a>
+      <div class="nav-cap" data-i="menu">CARD MENU</div>
+      <nav aria-label="Card menu">
+        <button class="nav-item active" data-view="generate" data-i="genNav">Password generator</button>
+        <button class="nav-item" data-view="validate" data-i="valNav">Password check</button>
+        <button class="nav-item" data-view="guide" data-i="guideNav">Psychogun Card guide</button>
+        <button class="nav-item" data-view="reference" data-i="refNav">Technical reference</button>
+      </nav>
+      <div class="sidebar-block"><div class="small-head" data-i="compatible">COMPATIBLE VERSIONS</div><div class="rev-line"><i></i> CBR1 <span>JP</span></div><div class="rev-line"><i></i> CBR2 <span>EX</span></div><p data-i="sameCodec">Shared password algorithm</p></div>
+      <a class="archive-link" href="https://bandainamco-am.co.jp/am/vg/cobra/special/card/index.php" target="_blank" rel="noopener" data-i="official">Original card guide ↗</a>
+      <div class="sidebar-foot" data-i="offline">OFFLINE / FAN RESTORATION</div>
+    </aside>
+    <main id="content">
+      <div class="hero"><div class="hero-eyebrow">COBRA THE ARCADE / SPECIAL</div><h1 data-i="heading">PSYCHOGUN CARD</h1></div>
+      <div class="section-bar"><span data-i="section">PASSWORD CENTER</span></div>
+      <div id="main_panel">
+        <div class="intro"><div class="kicker"><span class="status-dot"></span><span data-i="local">LOCAL PASSWORD SERVICE</span><span class="version">REV 01</span></div><p data-i="intro">Restore the original web-password rewards for your Psychogun Card. Generate or inspect a nine-letter code, entirely offline.</p></div>
+        <div class="tabs" role="group" aria-label="Password tools"><button data-view="generate" class="active" data-i="generate">GENERATE</button><button data-view="validate" data-i="validate">VALIDATE</button><button data-view="guide" data-i="guide">GUIDE</button></div>
+        <section id="identity" class="panel">
+          <h2><span class="num">01</span><span data-i="cardIdentity">CARD IDENTIFICATION</span></h2>
+          <div class="panel-body">
+            <div class="field-head"><label for="cardName" data-i="cardName">Card name / raw bytes</label><div class="switch" role="group" aria-label="Name encoding"><button id="asciiMode" type="button" aria-pressed="true">ASCII</button><button id="hexMode" type="button" aria-pressed="false">HEX</button></div></div>
+            <div class="input-row"><input id="cardName" type="text" value="COBRA" spellcheck="false" autocomplete="off" maxlength="9" aria-describedby="nameHelp"><button id="demo" class="minor" type="button" data-i="demo">DEMO NAME</button></div>
+            <p class="help" id="nameHelp" data-i="asciiHelp">1–9 printable ASCII characters, padded with zero bytes. Match the actual card bytes exactly.</p>
+            <div class="byte-strip"><span data-i="raw">RAW NAME BYTES</span><output id="bytes">43 4F 42 52 41 00 00 00 00</output></div>
+          </div>
+        </section>
+        <section id="generateView" data-panel="generate">
+          <div class="panel">
+            <h2><span class="num">02</span><span data-i="selectReward">SELECT WEB REWARDS</span></h2>
+            <div class="panel-body"><div class="field-head"><p class="help flush" data-i="rewardHelp">Eight verified password flags. Individual reward names are still under investigation.</p><div class="quick"><button id="all" type="button" class="minor" data-i="all">ALL</button><button id="none" type="button" class="minor" data-i="none">NONE</button></div></div>
+              <div class="rewards" id="rewards"></div>
+              <div class="maskline"><span data-i="mask">REWARD MASK</span><output id="mask">0xFF</output><span id="count">8 / 8</span></div>
+              <details class="advanced"><summary data-i="advanced">Advanced parameters</summary><div class="advanced-grid"><label><span data-i="key">XOR key (0–255)</span><input id="key" type="number" min="0" max="255" step="1" value="0"></label><label><span data-i="version">Version (0–3)</span><select id="version"><option>0</option><option>1</option><option>2</option><option>3</option></select></label></div><p class="help" data-i="advancedHelp">Defaults reproduce our native-tested fixture; the original website’s key/version convention is unknown.</p></details>
+              <button id="generate" class="action" type="button"><span>▶</span> <span data-i="generateAction">GENERATE PASSWORD</span></button>
+            </div>
+          </div>
+          <div class="result" aria-live="polite"><div class="result-title"><span data-i="result">WEB REWARD PASSWORD</span><span class="result-tag" id="genStatus" data-i="ready">READY</span></div><output class="password" id="generated">ZBEXCKAOI</output><div class="result-bottom"><span data-i="nine">9 LETTERS / JP + EX</span><button type="button" class="minor" id="copy" data-i="copy">COPY CODE</button></div><p class="result-message" id="genMessage" hidden></p></div>
+        </section>
+        <section id="validateView" data-panel="validate" hidden>
+          <div class="panel"><h2><span class="num">02</span><span data-i="checkTitle">CHECK A WEB PASSWORD</span></h2><div class="panel-body"><label for="passwordInput" data-i="enterPassword">Enter nine-letter reward password</label><input class="code-input" id="passwordInput" type="text" value="ZBEXCKAOI" spellcheck="false" autocomplete="off" maxlength="9"><p class="help" data-i="checkHelp">Checks the recovered checksum and card-name sum/length. It does not verify a unique card identity.</p><button class="action" id="validate" type="button"><span>▶</span> <span data-i="validateAction">VALIDATE PASSWORD</span></button></div></div>
+          <div class="result" aria-live="polite"><div class="result-title"><span data-i="validationResult">VALIDATION RESULT</span><span class="result-tag" id="valStatus" data-i="waiting">WAITING</span></div><div id="valResult" class="val-result" data-i="valPlaceholder">Enter a password to inspect its reward mask.</div></div>
+        </section>
+        <section id="guideView" data-panel="guide" hidden>
+          <div class="panel"><h2><span class="num">01</span><span data-i="howWorks">HOW THE CARD SYSTEM WORKS</span></h2><div class="panel-body guide-body"><p data-i="guide1">The original arcade cabinet validates reward passwords locally. This restoration replaces only the recovered incoming web-reward password function, not the original ranking website or card-reader hardware.</p><ol><li data-i="step1">Identify the nine raw bytes of your card name.</li><li data-i="step2">Select the desired web reward flags and generate a code.</li><li data-i="step3">Use the game's original password-entry path when available. That interface and persistent card writing are not yet verified.</li></ol><div class="point-head"><span data-i="researchPoint">RESEARCH POINT</span></div><p data-i="guide2">Hidden Namco collectibles are separate from web rewards. Pac-Man has been collected in both JP and EX after clearing its collection bit.</p><img src="assets/story1.png" alt="Story 1 — Shadow of Casino Tower" class="story-banner"><div class="guide-note" data-i="pacman">Pac-Man: Story 1, Area 1. Destroy the GOLD MINE sign after the red soldier near the golden goddess statue. The game suppresses items marked as already collected.</div></div></div>
+        </section>
+        <section id="referenceView" data-panel="reference" hidden>
+          <div class="panel"><h2><span class="num">01</span><span data-i="memoryMap">MEMORY MAP / EE OFFSETS</span></h2><div class="panel-body"><table class="ref-table"><thead><tr><th data-i="field">Field</th><th>JP / CBR1</th><th>EX / CBR2</th></tr></thead><tbody><tr><td data-i="record">Card record</td><td>00CEE140</td><td>00CEDF40</td></tr><tr><td data-i="progress">Progression</td><td>00CEE173</td><td>00CEDF73</td></tr><tr><td data-i="collectibles">Collectibles</td><td>00CEE175</td><td>00CEDF75</td></tr><tr><td data-i="webRewards">Web rewards</td><td>00CEE180</td><td>00CEDF80</td></tr><tr><td data-i="decoder">Native decoder</td><td>002F0D20</td><td>002F0BA0</td></tr></tbody></table><p class="help" data-i="offsetNote">Physical EE offsets, not Windows host addresses. This page does not read or modify emulator memory.</p></div></div>
+          <div class="panel"><h2><span class="num">02</span><span data-i="codecTitle">RECOVERED CODEC</span></h2><div class="panel-body"><p data-i="codecDesc">Nine custom base-26 letters encode a five-byte payload: card-name sum and length, XOR key, reward mask, six-bit checksum and two-bit version.</p><div class="byte-strip alphabet"><span data-i="alphabet">ALPHABET</span><code>WUFQZXCGEIKRJHPLBNYATODVSM</code></div><p class="help" data-i="fixture">Known synthetic fixture: COBRA + four zero bytes, mask FF, key 0, version 0 → ZBEXCKAOI.</p></div></div>
+        </section>
+        <div class="notice"><span class="notice-mark">!</span><p data-i="notice">Unofficial preservation tool. Reward identities, real card-name encoding, the native entry screen and persistence remain unverified. Story, mode and collectible unlocks are not encoded by this password.</p></div>
+      </div>
+      <footer class="main-foot"><span data-i="footer">CTA RESEARCH / EXP-04-002 · 004 · 011</span><a href="#pagetop" data-i="top">▲ TOP</a></footer>
+    </main>
+  </div>
+  <footer class="site-foot" data-i="credit">Original Cobra artwork belongs to its respective rights holders. Unofficial offline preservation project; not affiliated with Bandai Namco.</footer>
+</div>
+<script src="codec.js"></script><script src="app.js"></script>
+</body></html>
